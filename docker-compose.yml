@@ -13,7 +13,7 @@ services:
     networks:
       - web
     volumes:
-      - ./:/var/www/html
+      - ./drupal/:/var/www/html
 
   # crond:
   #   image: wodby/drupal:${DRUPAL_TAG}
@@ -40,7 +40,7 @@ services:
       NGINX_SERVER_ROOT: /var/www/html/web
       NGINX_VHOST_PRESET: ${NGINX_VHOST_PRESET}
     volumes:
-      - ./:/var/www/html:cached
+      - ./drupal/:/var/www/html:cached
     labels:
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)
 
