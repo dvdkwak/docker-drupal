@@ -4,3 +4,4 @@ composer.json
 composer.lock
 .gitattributes
 .vscode
+.DS_Store

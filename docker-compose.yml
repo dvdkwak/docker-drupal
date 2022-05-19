@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
 
@@ -42,15 +42,15 @@ services:
     volumes:
       - ./drupal/:/var/www/html:cached
     labels:
-      traefik.enable: true
+      - traefik.enable=true
       # HTTPS
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.rule: Host(`${PROJECT_BASE_URL}`)
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.entrypoints: websecure
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.tls: true
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.tls.certresolver: le
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.tls=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx.tls.certresolver=le
       # HTTP
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx-http.rule: Host(`${PROJECT_BASE_URL}`)
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx-http.entrypoints: web
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx-http.rule=Host(`${PROJECT_BASE_URL}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_nginx-http.entrypoints=web
 
   mariadb:
     image: mariadb:${MARIADB_TAG}
@@ -78,11 +78,11 @@ services:
       PMA_USER: ${DB_USER}
       PMA_PASSWORD: ${DB_PASSWORD}
     labels:
-      traefik.enable: true
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.rule: Host(`${PROJECT_MY_ADMIN_URL}`)
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.entrypoints: websecure
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.tls: true
-      traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.tls.certresolver: le
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.rule=Host(`${PROJECT_MY_ADMIN_URL}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.tls=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}_phpmyadmin.tls.certresolver=le
 
 
 # Replaced this with a local folder to store the codebase in there
